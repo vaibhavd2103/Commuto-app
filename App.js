@@ -11,35 +11,38 @@ import SignUp from "./src/Screens/SignUp";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [dataLoaded, setDataLoaded] = useState(false);
+	const [dataLoaded, setDataLoaded] = useState(false);
 
-  const fetchFonts = () => {
-    return Font.loadAsync({
-      RoboBold: require("./assets/fonts/Roboto-Bold.ttf"),
-      RoboRegular: require("./assets/fonts/Roboto-Regular.ttf"),
-      RoboMedium: require("./assets/fonts/Roboto-Medium.ttf"),
-      RoboItalic: require("./assets/fonts/Roboto-Italic.ttf"),
-      RoboLight: require("./assets/fonts/Roboto-Light.ttf"),
-    });
-  };
+	const fetchFonts = () => {
+		return Font.loadAsync({
+			RoboBold: require("./assets/fonts/Roboto-Bold.ttf"),
+			RoboRegular: require("./assets/fonts/Roboto-Regular.ttf"),
+			RoboMedium: require("./assets/fonts/Roboto-Medium.ttf"),
+			RoboItalic: require("./assets/fonts/Roboto-Italic.ttf"),
+			RoboLight: require("./assets/fonts/Roboto-Light.ttf"),
+		});
+	};
 
-  if (!dataLoaded) {
-    return (
-      <AppLoading
-        startAsync={() => fetchFonts()}
-        onFinish={() => setDataLoaded(true)}
-        onError={(err) => console.log(err)}
-      />
-    );
-  }
+	if (!dataLoaded) {
+		return (
+			<AppLoading
+				startAsync={() => fetchFonts()}
+				onFinish={() => setDataLoaded(true)}
+				onError={(err) => console.log(err)}
+			/>
+		);
+	}
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+	return (
+		<NavigationContainer>
+			<Stack.Navigator
+				screenOptions={{ headerShown: false }}
+				// initialRouteName="SignUp"
+			>
+				<Stack.Screen name="Login" component={Login} />
+				<Stack.Screen name="SignUp" component={SignUp} />
+				<Stack.Screen name="Home" component={Home} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 }
